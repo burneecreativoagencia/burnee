@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Burnee Creativo — Video con IA · The Future is Now</title>
+<meta name="description" content="Burnee Creativo · Estudio audiovisual de video con IA en Mendoza, Argentina. Contenido cinematográfico, publicitario y narrativo hecho con inteligencia artificial dirigida.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --purple:#6B2D8B;
+    --purple-deep:#3d1653;
+    --purple-glow:#a24fd0;
+    --gold:#F5A623;
+    --gold-soft:#ffce6b;
+    --ink:#0c0710;
+    --ink-2:#160b1e;
+    --paper:#f7f2fb;
+    --muted:#b9a7c9;
+    --font-display:'Space Grotesk',sans-serif;
+    --font-body:'Inter',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:var(--font-body);
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--gold);color:var(--ink)}
+
+  /* progress bar */
+  .progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--purple-glow),var(--gold));z-index:200;transition:width .1s linear}
+
+  /* nav */
+  nav{
+    position:fixed;top:0;left:0;width:100%;z-index:150;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:22px clamp(20px,5vw,64px);
+    mix-blend-mode:difference;
+  }
+  .brand{font-family:var(--font-display);font-weight:700;font-size:22px;letter-spacing:-.5px;color:#fff;display:flex;align-items:center;gap:10px}
+  .brand .dot{width:11px;height:11px;border-radius:50%;background:var(--gold);box-shadow:0 0 14px var(--gold)}
+  .nav-links{display:flex;gap:28px;align-items:center}
+  .nav-links a{color:#fff;text-decoration:none;font-size:14px;font-weight:500;letter-spacing:.3px;opacity:.85;transition:opacity .3s}
+  .nav-links a:hover{opacity:1}
+  @media(max-width:760px){.nav-links{display:none}}
+
+  /* HERO */
+  .hero{position:relative;height:100vh;min-height:640px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;overflow:hidden}
+  .hero-media{position:absolute;inset:0;z-index:0}
+  .hero-media video{width:100%;height:100%;object-fit:cover;opacity:.42}
+  .hero-fallback{position:absolute;inset:0;z-index:0;
+    background:
+      radial-gradient(circle at 20% 20%,rgba(162,79,208,.55),transparent 45%),
+      radial-gradient(circle at 82% 70%,rgba(245,166,35,.35),transparent 50%),
+      linear-gradient(160deg,var(--ink) 0%,var(--purple-deep) 55%,var(--ink) 100%);
+    animation:drift 16s ease-in-out infinite alternate;
+  }
+  @keyframes drift{from{filter:hue-rotate(0deg) saturate(1)}to{filter:hue-rotate(18deg) saturate(1.25)}}
+  .hero-grain{position:absolute;inset:0;z-index:1;opacity:.06;pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  .hero-inner{position:relative;z-index:3;padding:0 20px;max-width:1100px}
+  .eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-display);font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-soft);margin-bottom:26px;opacity:0;animation:fadeUp .9s .2s forwards}
+  .eyebrow .line{width:34px;height:1px;background:var(--gold)}
+  h1.mega{
+    font-family:var(--font-display);font-weight:700;
+    font-size:clamp(48px,10.5vw,150px);
+    line-height:.92;letter-spacing:-.03em;color:#fff;
+  }
+  h1.mega .row{display:block;overflow:hidden}
+  h1.mega .row span{display:inline-block;transform:translateY(110%);animation:reveal 1s cubic-bezier(.16,1,.3,1) forwards}
+  h1.mega .row:nth-child(2) span{animation-delay:.12s}
+  h1.mega .row:nth-child(3) span{animation-delay:.24s}
+  .grad{background:linear-gradient(100deg,var(--gold),var(--purple-glow));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero-sub{margin:30px auto 0;max-width:560px;font-size:clamp(15px,2vw,19px);color:var(--muted);line-height:1.6;opacity:0;animation:fadeUp 1s .55s forwards}
+  .hero-cta{margin-top:40px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeUp 1s .7s forwards}
+  .btn{font-family:var(--font-display);font-weight:600;font-size:15px;padding:16px 30px;border-radius:50px;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:transform .25s,box-shadow .25s;cursor:pointer;border:none}
+  .btn-gold{background:var(--gold);color:var(--ink);box-shadow:0 8px 30px rgba(245,166,35,.35)}
+  .btn-gold:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 14px 40px rgba(245,166,35,.5)}
+  .btn-ghost{background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(6px)}
+  .btn-ghost:hover{background:rgba(255,255,255,.14);transform:translateY(-3px)}
+  .scroll-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:3;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeUp 1s 1.1s forwards}
+  .scroll-hint .mouse{width:22px;height:36px;border:1.5px solid var(--muted);border-radius:12px;position:relative}
+  .scroll-hint .mouse::after{content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);width:3px;height:7px;border-radius:2px;background:var(--gold);animation:wheel 1.6s infinite}
+  @keyframes wheel{0%{opacity:1;top:6px}70%{opacity:0;top:16px}100%{opacity:0}}
+
+  @keyframes reveal{to{transform:translateY(0)}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+  /* marquee */
+  .marquee{border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08);overflow:hidden;background:var(--ink-2);padding:20px 0}
+  .marquee-track{display:flex;gap:56px;white-space:nowrap;width:max-content;animation:scrollx 24s linear infinite;font-family:var(--font-display);font-size:clamp(18px,3vw,30px);font-weight:600;color:rgba(255,255,255,.5)}
+  .marquee-track .m{display:inline-flex;align-items:center;gap:56px}
+  .marquee-track b{color:var(--gold)}
+  @keyframes scrollx{to{transform:translateX(-50%)}}
+
+  /* section shell */
+  section.block{padding:clamp(70px,10vw,140px) clamp(20px,5vw,64px);position:relative}
+  .kicker{font-family:var(--font-display);font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:18px;display:flex;align-items:center;gap:12px}
+  .kicker .num{color:var(--purple-glow)}
+  h2.big{font-family:var(--font-display);font-weight:700;font-size:clamp(32px,5.5vw,68px);line-height:1.02;letter-spacing:-.02em}
+
+  /* split rows */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,72px);align-items:center;max-width:1280px;margin:0 auto}
+  .split.rev .txt{order:2}
+  .split.rev .media{order:1}
+  @media(max-width:860px){.split{grid-template-columns:1fr}.split.rev .txt{order:1}.split.rev .media{order:2}}
+  .txt p.lead{color:var(--muted);font-size:clamp(15px,1.7vw,18px);line-height:1.7;margin-top:22px;max-width:520px}
+  .txt ul{list-style:none;margin-top:28px;display:flex;flex-direction:column;gap:14px}
+  .txt ul li{display:flex;gap:14px;align-items:flex-start;font-size:15px;color:#e7dcf1}
+  .txt ul li::before{content:'';flex:none;width:8px;height:8px;margin-top:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold)}
+
+  /* video frame */
+  .vframe{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:16/10;background:linear-gradient(140deg,var(--purple-deep),var(--ink-2));border:1px solid rgba(255,255,255,.09);box-shadow:0 30px 70px rgba(0,0,0,.55)}
+  .vframe.portrait{aspect-ratio:9/12}
+  .vframe video,.vframe img{width:100%;height:100%;object-fit:cover;display:block}
+  .vframe .ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:26px;color:var(--muted);gap:14px}
+  .vframe .ph .play{width:64px;height:64px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 0 rgba(245,166,35,.5);animation:pulse 2.4s infinite}
+  .vframe .ph .play svg{margin-left:4px}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(245,166,35,.45)}70%{box-shadow:0 0 0 22px rgba(245,166,35,0)}100%{box-shadow:0 0 0 0 rgba(245,166,35,0)}}
+  .vframe .ph small{font-size:12px;letter-spacing:1px;text-transform:uppercase}
+  .vframe .badge{position:absolute;top:14px;left:14px;background:rgba(12,7,16,.7);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.12);padding:7px 14px;border-radius:50px;font-family:var(--font-display);font-size:12px;letter-spacing:.5px;color:#fff}
+
+  /* portfolio grid */
+  .pf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1280px;margin:48px auto 0}
+  @media(max-width:860px){.pf-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.pf-grid{grid-template-columns:1fr}}
+  .pf-item .vframe{aspect-ratio:9/13}
+  .pf-item h4{font-family:var(--font-display);font-weight:600;margin-top:16px;font-size:17px}
+  .pf-item span{color:var(--muted);font-size:13px}
+
+  /* products */
+  .prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;max-width:1280px;margin:52px auto 0}
+  @media(max-width:980px){.prod-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:520px){.prod-grid{grid-template-columns:1fr}}
+  .prod{background:linear-gradient(160deg,rgba(107,45,139,.22),rgba(22,11,30,.4));border:1px solid rgba(255,255,255,.09);border-radius:18px;padding:26px 22px;transition:transform .3s,border-color .3s,background .3s;position:relative;overflow:hidden}
+  .prod:hover{transform:translateY(-6px);border-color:var(--gold);background:linear-gradient(160deg,rgba(107,45,139,.4),rgba(22,11,30,.6))}
+  .prod .tag{font-family:var(--font-display);font-size:12px;color:var(--gold);letter-spacing:1px}
+  .prod h3{font-family:var(--font-display);font-weight:600;font-size:20px;margin:12px 0 10px}
+  .prod p{color:var(--muted);font-size:14px;line-height:1.6}
+  .prod .arrow{margin-top:18px;color:#fff;font-size:20px;transition:transform .3s}
+  .prod:hover .arrow{transform:translateX(6px);color:var(--gold)}
+
+  /* founder */
+  .founder-wrap{background:linear-gradient(180deg,var(--ink),var(--ink-2))}
+
+  /* CTA / contacto */
+  .contact{position:relative;text-align:center;background:
+      radial-gradient(circle at 50% 0%,rgba(162,79,208,.4),transparent 55%),
+      linear-gradient(180deg,var(--ink-2),var(--purple-deep));overflow:hidden}
+  .contact h2{margin:0 auto;max-width:900px}
+  .contact p.lead{color:var(--muted);max-width:560px;margin:24px auto 0;font-size:18px;line-height:1.6}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:900px;margin:56px auto 0;text-align:left}
+  @media(max-width:720px){.steps{grid-template-columns:1fr}}
+  .step{padding:26px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09)}
+  .step .n{font-family:var(--font-display);font-size:40px;font-weight:700;color:var(--gold);line-height:1}
+  .step h4{font-family:var(--font-display);margin:14px 0 8px;font-size:18px}
+  .step p{color:var(--muted);font-size:14px;line-height:1.6}
+  .contact-cta{margin-top:56px}
+  .whats{background:#25D366;color:#062e18}
+  .whats:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 14px 40px rgba(37,211,102,.4)}
+
+  footer{padding:44px clamp(20px,5vw,64px);border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px;background:var(--ink)}
+  footer .brand{color:#fff}
+  footer .fnote{color:var(--muted);font-size:13px}
+  footer .socials{display:flex;gap:18px}
+  footer .socials a{color:var(--muted);text-decoration:none;font-size:14px;transition:color .3s}
+  footer .socials a:hover{color:var(--gold)}
+
+  /* reveal on scroll */
+  .reveal{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* floating whatsapp */
+  .fab{position:fixed;bottom:24px;right:24px;z-index:180;width:58px;height:58px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(37,211,102,.45);text-decoration:none;transition:transform .3s}
+  .fab:hover{transform:scale(1.1)}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+
+<nav>
+  <div class="brand"><span class="dot"></span>BURNEE</div>
+  <div class="nav-links">
+    <a href="#portfolio">Trabajos</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#fundador">Nosotros</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="hero-media">
+    <!-- 🎬 REEMPLAZÁ: poné acá tu video reel de fondo (muteado, en loop). Descomentá y cambiá el src -->
+    <!-- <video autoplay muted loop playsinline poster="poster.jpg"><source src="reel-hero.mp4" type="video/mp4"></video> -->
+  </div>
+  <div class="hero-fallback"></div>
+  <div class="hero-grain"></div>
+
+  <div class="hero-inner">
+    <span class="eyebrow"><span class="line"></span>Estudio de video con IA · Mendoza, AR</span>
+    <h1 class="mega">
+      <span class="row"><span>CREAMOS LO QUE</span></span>
+      <span class="row"><span>ANTES ERA</span></span>
+      <span class="row"><span class="grad">IMPOSIBLE</span></span>
+    </h1>
+    <p class="hero-sub">Video cinematográfico, publicitario y narrativo producido con inteligencia artificial dirigida. Ideas grandes, sin límites de producción. <strong style="color:#fff">The future is now.</strong></p>
+    <div class="hero-cta">
+      <a href="#contacto" class="btn btn-gold">Quiero mi video ▸</a>
+      <a href="#portfolio" class="btn btn-ghost">Ver trabajos</a>
+    </div>
+  </div>
+
+  <div class="scroll-hint"><div class="mouse"></div>Scroll</div>
+</header>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="m">CINEMÁTICO <b>·</b> PUBLICITARIO <b>·</b> NARRATIVO <b>·</b> MICRO-DRAMAS <b>·</b> BRAND UNIVERSES <b>·</b> AI-DRIVEN <b>·</b></span>
+    <span class="m">CINEMÁTICO <b>·</b> PUBLICITARIO <b>·</b> NARRATIVO <b>·</b> MICRO-DRAMAS <b>·</b> BRAND UNIVERSES <b>·</b> AI-DRIVEN <b>·</b></span>
+  </div>
+</div>
+
+<!-- ============ INTRO SPLIT ============ -->
+<section class="block" id="portfolio">
+  <div class="split reveal">
+    <div class="txt">
+      <div class="kicker"><span class="num">01</span> — Portfolio</div>
+      <h2 class="big">Lo que hacemos<br>habla por sí solo.</h2>
+      <p class="lead">No vendemos "videos con IA". Producimos piezas que capturan atención en el primer segundo y no la sueltan. Cada proyecto combina dirección creativa humana con las herramientas de IA más avanzadas del momento.</p>
+      <ul>
+        <li>Guion, dirección y estética pensados para tu marca</li>
+        <li>Producido con Runway, Kling y Sora</li>
+        <li>Listo para Meta, TikTok y YouTube</li>
+      </ul>
+    </div>
+    <div class="media">
+      <div class="vframe">
+        <span class="badge">🎬 REEL PRINCIPAL</span>
+        <!-- 🎬 REEMPLAZÁ: tu video demo/reel. Descomentá y cambiá el src -->
+        <!-- <video controls poster="poster-reel.jpg"><source src="reel.mp4" type="video/mp4"></video> -->
+        <div class="ph">
+          <div class="play"><svg width="22" height="22" viewBox="0 0 24 24" fill="#0c0710"><path d="M8 5v14l11-7z"/></svg></div>
+          <small>Poné acá tu reel principal</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PORTFOLIO GRID ============ -->
+<section class="block" style="padding-top:0">
+  <div class="reveal" style="max-width:1280px;margin:0 auto">
+    <div class="kicker"><span class="num">·</span> Selección de trabajos</div>
+    <h2 class="big">Casos & piezas</h2>
+    <div class="pf-grid">
+      <div class="pf-item">
+        <div class="vframe"><span class="badge">Publicidad</span>
+          <!-- 🎬 <video controls poster="p1.jpg"><source src="video1.mp4" type="video/mp4"></video> -->
+          <div class="ph"><div class="play"><svg width="20" height="20" viewBox="0 0 24 24" fill="#0c0710"><path d="M8 5v14l11-7z"/></svg></div><small>Video 1</small></div>
+        </div>
+        <h4>Campaña Meta Ads</h4><span>Spot performance · 15s</span>
+      </div>
+      <div class="pf-item">
+        <div class="vframe"><span class="badge">Narrativo</span>
+          <div class="ph"><div class="play"><svg width="20" height="20" viewBox="0 0 24 24" fill="#0c0710"><path d="M8 5v14l11-7z"/></svg></div><small>Video 2</small></div>
+        </div>
+        <h4>Micro-drama de marca</h4><span>Activo Digital · serie</span>
+      </div>
+      <div class="pf-item">
+        <div class="vframe"><span class="badge">Cinemático</span>
+          <div class="ph"><div class="play"><svg width="20" height="20" viewBox="0 0 24 24" fill="#0c0710"><path d="M8 5v14l11-7z"/></svg></div><small>Video 3</small></div>
+        </div>
+        <h4>Universo visual</h4><span>Brand film · IA dirigida</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICIOS / SPLIT REVERSE ============ -->
+<section class="block" id="servicios" style="background:linear-gradient(180deg,var(--ink),var(--ink-2))">
+  <div class="split rev reveal">
+    <div class="txt">
+      <div class="kicker"><span class="num">02</span> — Servicios</div>
+      <h2 class="big">Un formato<br>para cada objetivo.</h2>
+      <p class="lead">Desde una pieza express hasta un ecosistema narrativo completo. Elegís según lo que tu marca necesita hoy.</p>
+    </div>
+    <div class="media">
+      <div class="vframe portrait">
+        <span class="badge">✨ Demo servicios</span>
+        <!-- 🎬 <video controls poster="serv.jpg"><source src="servicios.mp4" type="video/mp4"></video> -->
+        <div class="ph"><div class="play"><svg width="22" height="22" viewBox="0 0 24 24" fill="#0c0710"><path d="M8 5v14l11-7z"/></svg></div><small>Video vertical de muestra</small></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="prod-grid reveal">
+    <div class="prod"><span class="tag">PREMIUM</span><h3>Activo Digital</h3><p>Ecosistema narrativo: micro-dramas, contenido cinematográfico y universos de marca.</p><div class="arrow">→</div></div>
+    <div class="prod"><span class="tag">RECURRENTE</span><h3>Pack Videos IA</h3><p>Paquete mensual de contenido para mantener tus redes siempre activas.</p><div class="arrow">→</div></div>
+    <div class="prod"><span class="tag">PERFORMANCE</span><h3>Videos Publicitarios</h3><p>Spots orientados a conversión para Meta, TikTok y YouTube.</p><div class="arrow">→</div></div>
+    <div class="prod"><span class="tag">EXPRESS</span><h3>Video Express</h3><p>Entrega rápida, punto de entrada ideal para probar el poder de la IA.</p><div class="arrow">→</div></div>
+  </div>
+</section>
+
+<!-- ============ FUNDADOR ============ -->
+<section class="block founder-wrap" id="fundador">
+  <div class="split reveal">
+    <div class="media">
+      <div class="vframe portrait">
+        <span class="badge">👋 El fundador</span>
+        <!-- 🎬/🖼️ REEMPLAZÁ por tu video de presentación o foto:
+             Video: <video controls poster="ivan.jpg"><source src="fundador.mp4" type="video/mp4"></video>
+             Foto:  <img src="ivan.jpg" alt="Fundador de Burnee"> -->
+        <div class="ph"><div class="play"><svg width="22" height="22" viewBox="0 0 24 24" fill="#0c0710"><path d="M8 5v14l11-7z"/></svg></div><small>Tu video / foto de presentación</small></div>
+      </div>
+    </div>
+    <div class="txt">
+      <div class="kicker"><span class="num">03</span> — Quién está detrás</div>
+      <h2 class="big">Detrás de Burnee<br>hay una obsesión.</h2>
+      <p class="lead">Soy quien dirige cada proyecto. Burnee nació de una idea simple: la IA no reemplaza la creatividad, la potencia. Combino visión narrativa con las mejores herramientas del mundo para que tu marca cuente historias que antes eran imposibles de producir — con la agilidad y el costo de hoy.</p>
+      <p class="lead">Trabajamos desde Mendoza para clientes de Argentina y el mundo. Cada video es <strong style="color:#fff">producción asistida</strong>: dirección humana, ejecución con IA.</p>
+      <div class="hero-cta" style="animation:none;opacity:1;margin-top:32px;justify-content:flex-start">
+        <a href="#contacto" class="btn btn-gold">Trabajemos juntos ▸</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACTO / CÓMO TRABAJAR ============ -->
+<section class="block contact" id="contacto">
+  <div class="reveal">
+    <div class="kicker" style="justify-content:center"><span class="num">04</span> — Cómo trabajamos</div>
+    <h2 class="big">Tu próximo video<br>empieza con un mensaje.</h2>
+    <p class="lead">Sin vueltas ni formularios eternos. Escribinos, contanos tu idea y en 24 h te devolvemos una propuesta.</p>
+
+    <div class="steps">
+      <div class="step"><div class="n">1</div><h4>Contanos tu idea</h4><p>Un mensaje por WhatsApp con lo que necesitás. Sin compromiso.</p></div>
+      <div class="step"><div class="n">2</div><h4>Propuesta a medida</h4><p>Te enviamos formato, alcance y precio en dólares. Claro desde el arranque.</p></div>
+      <div class="step"><div class="n">3</div><h4>Producimos y entregamos</h4><p>Dirección creativa + IA. Tu video listo para publicar.</p></div>
+    </div>
+
+    <div class="contact-cta">
+      <!-- 📱 REEMPLAZÁ el número (formato internacional sin + ni espacios) -->
+      <a href="https://wa.me/5492610000000?text=Hola%20Burnee!%20Quiero%20info%20sobre%20un%20video%20con%20IA" class="btn whats" target="_blank" rel="noopener">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#062e18"><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1012 2zm5.9 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.2-.3.5-.4.7-.4h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.3.3c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.3.1.5.1.7-.1l.9-1c.2-.2.4-.2.6-.1l2 .9c.3.2.5.3.5.4.1.2.1.7-.1 1.1z"/></svg>
+        Escribinos por WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="brand"><span class="dot"></span>BURNEE CREATIVO</div>
+  <div class="fnote">Video con IA · Mendoza, Argentina · The future is now</div>
+  <div class="socials">
+    <a href="https://instagram.com/burneecreativo" target="_blank" rel="noopener">Instagram ↗</a>
+    <a href="https://wa.me/5492610000000" target="_blank" rel="noopener">WhatsApp ↗</a>
+  </div>
+</footer>
+
+<!-- floating whatsapp -->
+<a class="fab" href="https://wa.me/5492610000000?text=Hola%20Burnee!" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1012 2zm5.9 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.2-.3.5-.4.7-.4h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.3.3c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.3.1.5.1.7-.1l.9-1c.2-.2.4-.2.6-.1l2 .9c.3.2.5.3.5.4.1.2.1.7-.1 1.1z"/></svg>
+</a>
+
+<script>
+  // scroll progress
+  const bar=document.getElementById('progress');
+  addEventListener('scroll',()=>{
+    const h=document.documentElement;
+    const s=h.scrollTop/(h.scrollHeight-h.clientHeight);
+    bar.style.width=(s*100)+'%';
+  },{passive:true});
+
+  // reveal on scroll
+  const io=new IntersectionObserver((es)=>{
+    es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}});
+  },{threshold:.15});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
