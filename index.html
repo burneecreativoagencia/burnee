@@ -10,39 +10,22 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --purple:#6B2D8B;
-    --purple-deep:#3d1653;
-    --purple-glow:#a24fd0;
-    --gold:#F5A623;
-    --gold-soft:#ffce6b;
-    --ink:#0c0710;
-    --ink-2:#160b1e;
-    --paper:#f7f2fb;
-    --muted:#b9a7c9;
+    --purple:#6B2D8B;--purple-deep:#3d1653;--purple-glow:#a24fd0;
+    --gold:#F5A623;--gold-soft:#ffce6b;
+    --ink:#0c0710;--ink-2:#160b1e;--card:#1a0f24;
+    --paper:#f7f2fb;--muted:#b9a7c9;
+    --line:rgba(255,255,255,.09);
     --font-display:'Space Grotesk',sans-serif;
     --font-body:'Inter',sans-serif;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{
-    background:var(--ink);
-    color:var(--paper);
-    font-family:var(--font-body);
-    overflow-x:hidden;
-    -webkit-font-smoothing:antialiased;
-  }
+  body{background:var(--ink);color:var(--paper);font-family:var(--font-body);overflow-x:hidden;-webkit-font-smoothing:antialiased}
   ::selection{background:var(--gold);color:var(--ink)}
 
-  /* progress bar */
   .progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--purple-glow),var(--gold));z-index:200;transition:width .1s linear}
 
-  /* nav */
-  nav{
-    position:fixed;top:0;left:0;width:100%;z-index:150;
-    display:flex;justify-content:space-between;align-items:center;
-    padding:22px clamp(20px,5vw,64px);
-    mix-blend-mode:difference;
-  }
+  nav.top{position:fixed;top:0;left:0;width:100%;z-index:150;display:flex;justify-content:space-between;align-items:center;padding:22px clamp(20px,5vw,64px);mix-blend-mode:difference}
   .brand{font-family:var(--font-display);font-weight:700;font-size:22px;letter-spacing:-.5px;color:#fff;display:flex;align-items:center;gap:10px}
   .brand .dot{width:11px;height:11px;border-radius:50%;background:var(--gold);box-shadow:0 0 14px var(--gold)}
   .nav-links{display:flex;gap:28px;align-items:center}
@@ -51,34 +34,34 @@
   @media(max-width:760px){.nav-links{display:none}}
 
   /* HERO */
-  .hero{position:relative;height:100vh;min-height:640px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;overflow:hidden}
-  .hero-media{position:absolute;inset:0;z-index:0}
-  .hero-media video{width:100%;height:100%;object-fit:cover;opacity:.42}
+  .hero{position:relative;height:100vh;min-height:640px;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;text-align:left;overflow:hidden;padding-bottom:clamp(70px,10vh,120px)}
   .hero-fallback{position:absolute;inset:0;z-index:0;
     background:
       radial-gradient(circle at 20% 20%,rgba(162,79,208,.55),transparent 45%),
       radial-gradient(circle at 82% 70%,rgba(245,166,35,.35),transparent 50%),
       linear-gradient(160deg,var(--ink) 0%,var(--purple-deep) 55%,var(--ink) 100%);
-    animation:drift 16s ease-in-out infinite alternate;
-  }
+    animation:drift 16s ease-in-out infinite alternate}
   @keyframes drift{from{filter:hue-rotate(0deg) saturate(1)}to{filter:hue-rotate(18deg) saturate(1.25)}}
-  .hero-grain{position:absolute;inset:0;z-index:1;opacity:.06;pointer-events:none;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-  .hero-inner{position:relative;z-index:3;padding:0 20px;max-width:1100px}
+
+  /* YouTube background */
+  .yt-bg{position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none}
+  .yt-bg iframe{position:absolute;top:50%;left:50%;width:100vw;height:56.25vw;min-height:100vh;min-width:177.78vh;transform:translate(-50%,-50%);border:0;opacity:1}
+  .hero-overlay{position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:
+      linear-gradient(180deg,rgba(12,7,16,.35) 0%,rgba(12,7,16,0) 22%,rgba(12,7,16,0) 45%,rgba(12,7,16,.6) 78%,rgba(12,7,16,.94) 100%),
+      radial-gradient(120% 80% at 50% 40%,transparent 55%,rgba(12,7,16,.5) 100%)}
+  .hero-grain{position:absolute;inset:0;z-index:2;opacity:.06;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  .hero-inner{position:relative;z-index:3;padding:0 clamp(20px,5vw,64px);max-width:1000px;text-shadow:0 2px 30px rgba(0,0,0,.55)}
   .eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-display);font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-soft);margin-bottom:26px;opacity:0;animation:fadeUp .9s .2s forwards}
   .eyebrow .line{width:34px;height:1px;background:var(--gold)}
-  h1.mega{
-    font-family:var(--font-display);font-weight:700;
-    font-size:clamp(48px,10.5vw,150px);
-    line-height:.92;letter-spacing:-.03em;color:#fff;
-  }
+  h1.mega{font-family:var(--font-display);font-weight:700;font-size:clamp(40px,7.5vw,104px);line-height:.94;letter-spacing:-.03em;color:#fff}
   h1.mega .row{display:block;overflow:hidden}
   h1.mega .row span{display:inline-block;transform:translateY(110%);animation:reveal 1s cubic-bezier(.16,1,.3,1) forwards}
   h1.mega .row:nth-child(2) span{animation-delay:.12s}
   h1.mega .row:nth-child(3) span{animation-delay:.24s}
   .grad{background:linear-gradient(100deg,var(--gold),var(--purple-glow));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .hero-sub{margin:30px auto 0;max-width:560px;font-size:clamp(15px,2vw,19px);color:var(--muted);line-height:1.6;opacity:0;animation:fadeUp 1s .55s forwards}
-  .hero-cta{margin-top:40px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeUp 1s .7s forwards}
+  .hero-sub{margin:26px 0 0;max-width:540px;font-size:clamp(15px,2vw,19px);color:#eadff5;line-height:1.6;opacity:0;animation:fadeUp 1s .55s forwards}
+  .hero-cta{margin-top:36px;display:flex;gap:16px;justify-content:flex-start;flex-wrap:wrap;opacity:0;animation:fadeUp 1s .7s forwards}
   .btn{font-family:var(--font-display);font-weight:600;font-size:15px;padding:16px 30px;border-radius:50px;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:transform .25s,box-shadow .25s;cursor:pointer;border:none}
   .btn-gold{background:var(--gold);color:var(--ink);box-shadow:0 8px 30px rgba(245,166,35,.35)}
   .btn-gold:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 14px 40px rgba(245,166,35,.5)}
@@ -88,71 +71,44 @@
   .scroll-hint .mouse{width:22px;height:36px;border:1.5px solid var(--muted);border-radius:12px;position:relative}
   .scroll-hint .mouse::after{content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);width:3px;height:7px;border-radius:2px;background:var(--gold);animation:wheel 1.6s infinite}
   @keyframes wheel{0%{opacity:1;top:6px}70%{opacity:0;top:16px}100%{opacity:0}}
-
   @keyframes reveal{to{transform:translateY(0)}}
   @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
 
-  /* marquee */
   .marquee{border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08);overflow:hidden;background:var(--ink-2);padding:20px 0}
   .marquee-track{display:flex;gap:56px;white-space:nowrap;width:max-content;animation:scrollx 24s linear infinite;font-family:var(--font-display);font-size:clamp(18px,3vw,30px);font-weight:600;color:rgba(255,255,255,.5)}
   .marquee-track .m{display:inline-flex;align-items:center;gap:56px}
   .marquee-track b{color:var(--gold)}
   @keyframes scrollx{to{transform:translateX(-50%)}}
 
-  /* section shell */
   section.block{padding:clamp(70px,10vw,140px) clamp(20px,5vw,64px);position:relative}
   .kicker{font-family:var(--font-display);font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:18px;display:flex;align-items:center;gap:12px}
   .kicker .num{color:var(--purple-glow)}
   h2.big{font-family:var(--font-display);font-weight:700;font-size:clamp(32px,5.5vw,68px);line-height:1.02;letter-spacing:-.02em}
 
-  /* split rows */
+  /* TIPOS DE VIDEO — minimal (título + frase) */
+  .types{text-align:center;border-top:1px solid var(--line)}
+  .types .inner{max-width:900px;margin:0 auto}
+  .types p.phrase{color:var(--muted);font-size:clamp(17px,2.4vw,24px);line-height:1.6;margin-top:26px}
+  .types .names{margin-top:40px;display:flex;flex-wrap:wrap;justify-content:center;gap:14px 30px;font-family:var(--font-display);font-size:clamp(15px,2vw,19px);color:#e7dcf1}
+  .types .names span{position:relative;padding-bottom:4px}
+  .types .names span::after{content:'';position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--gold);transition:width .4s}
+  .types .names span:hover::after{width:100%}
+  .types .names .sep{color:var(--purple-glow);opacity:.6}
+
+  /* FOUNDER */
+  .founder-wrap{background:linear-gradient(180deg,var(--ink),var(--ink-2));border-top:1px solid var(--line)}
   .split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,72px);align-items:center;max-width:1280px;margin:0 auto}
-  .split.rev .txt{order:2}
-  .split.rev .media{order:1}
-  @media(max-width:860px){.split{grid-template-columns:1fr}.split.rev .txt{order:1}.split.rev .media{order:2}}
+  @media(max-width:860px){.split{grid-template-columns:1fr}}
   .txt p.lead{color:var(--muted);font-size:clamp(15px,1.7vw,18px);line-height:1.7;margin-top:22px;max-width:520px}
-  .txt ul{list-style:none;margin-top:28px;display:flex;flex-direction:column;gap:14px}
-  .txt ul li{display:flex;gap:14px;align-items:flex-start;font-size:15px;color:#e7dcf1}
-  .txt ul li::before{content:'';flex:none;width:8px;height:8px;margin-top:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold)}
+  .photo{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/5;background:linear-gradient(140deg,var(--purple-deep),var(--ink-2));border:1px solid rgba(255,255,255,.09);box-shadow:0 30px 70px rgba(0,0,0,.55)}
+  .photo img{width:100%;height:100%;object-fit:cover;display:block}
+  .photo .ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:var(--muted);text-align:center;padding:24px}
+  .photo .ph .ic{width:56px;height:56px;border-radius:50%;border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:24px}
+  .photo .ph small{font-size:12px;letter-spacing:1px;text-transform:uppercase}
+  .photo .badge{position:absolute;top:14px;left:14px;background:rgba(12,7,16,.7);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.12);padding:7px 14px;border-radius:50px;font-family:var(--font-display);font-size:12px;color:#fff}
 
-  /* video frame */
-  .vframe{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:16/10;background:linear-gradient(140deg,var(--purple-deep),var(--ink-2));border:1px solid rgba(255,255,255,.09);box-shadow:0 30px 70px rgba(0,0,0,.55)}
-  .vframe.portrait{aspect-ratio:9/12}
-  .vframe video,.vframe img{width:100%;height:100%;object-fit:cover;display:block}
-  .vframe .ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:26px;color:var(--muted);gap:14px}
-  .vframe .ph .play{width:64px;height:64px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 0 rgba(245,166,35,.5);animation:pulse 2.4s infinite}
-  .vframe .ph .play svg{margin-left:4px}
-  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(245,166,35,.45)}70%{box-shadow:0 0 0 22px rgba(245,166,35,0)}100%{box-shadow:0 0 0 0 rgba(245,166,35,0)}}
-  .vframe .ph small{font-size:12px;letter-spacing:1px;text-transform:uppercase}
-  .vframe .badge{position:absolute;top:14px;left:14px;background:rgba(12,7,16,.7);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.12);padding:7px 14px;border-radius:50px;font-family:var(--font-display);font-size:12px;letter-spacing:.5px;color:#fff}
-
-  /* portfolio grid */
-  .pf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1280px;margin:48px auto 0}
-  @media(max-width:860px){.pf-grid{grid-template-columns:1fr 1fr}}
-  @media(max-width:560px){.pf-grid{grid-template-columns:1fr}}
-  .pf-item .vframe{aspect-ratio:9/13}
-  .pf-item h4{font-family:var(--font-display);font-weight:600;margin-top:16px;font-size:17px}
-  .pf-item span{color:var(--muted);font-size:13px}
-
-  /* products */
-  .prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;max-width:1280px;margin:52px auto 0}
-  @media(max-width:980px){.prod-grid{grid-template-columns:1fr 1fr}}
-  @media(max-width:520px){.prod-grid{grid-template-columns:1fr}}
-  .prod{background:linear-gradient(160deg,rgba(107,45,139,.22),rgba(22,11,30,.4));border:1px solid rgba(255,255,255,.09);border-radius:18px;padding:26px 22px;transition:transform .3s,border-color .3s,background .3s;position:relative;overflow:hidden}
-  .prod:hover{transform:translateY(-6px);border-color:var(--gold);background:linear-gradient(160deg,rgba(107,45,139,.4),rgba(22,11,30,.6))}
-  .prod .tag{font-family:var(--font-display);font-size:12px;color:var(--gold);letter-spacing:1px}
-  .prod h3{font-family:var(--font-display);font-weight:600;font-size:20px;margin:12px 0 10px}
-  .prod p{color:var(--muted);font-size:14px;line-height:1.6}
-  .prod .arrow{margin-top:18px;color:#fff;font-size:20px;transition:transform .3s}
-  .prod:hover .arrow{transform:translateX(6px);color:var(--gold)}
-
-  /* founder */
-  .founder-wrap{background:linear-gradient(180deg,var(--ink),var(--ink-2))}
-
-  /* CTA / contacto */
-  .contact{position:relative;text-align:center;background:
-      radial-gradient(circle at 50% 0%,rgba(162,79,208,.4),transparent 55%),
-      linear-gradient(180deg,var(--ink-2),var(--purple-deep));overflow:hidden}
+  /* CONTACTO */
+  .contact{position:relative;text-align:center;background:radial-gradient(circle at 50% 0%,rgba(162,79,208,.4),transparent 55%),linear-gradient(180deg,var(--ink-2),var(--purple-deep));overflow:hidden;border-top:1px solid var(--line)}
   .contact h2{margin:0 auto;max-width:900px}
   .contact p.lead{color:var(--muted);max-width:560px;margin:24px auto 0;font-size:18px;line-height:1.6}
   .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:900px;margin:56px auto 0;text-align:left}
@@ -172,11 +128,9 @@
   footer .socials a{color:var(--muted);text-decoration:none;font-size:14px;transition:color .3s}
   footer .socials a:hover{color:var(--gold)}
 
-  /* reveal on scroll */
   .reveal{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
   .reveal.in{opacity:1;transform:none}
 
-  /* floating whatsapp */
   .fab{position:fixed;bottom:24px;right:24px;z-index:180;width:58px;height:58px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(37,211,102,.45);text-decoration:none;transition:transform .3s}
   .fab:hover{transform:scale(1.1)}
 </style>
@@ -184,23 +138,30 @@
 <body>
 <div class="progress" id="progress"></div>
 
-<nav>
+<nav class="top">
   <div class="brand"><span class="dot"></span>BURNEE</div>
   <div class="nav-links">
-    <a href="#portfolio">Trabajos</a>
-    <a href="#servicios">Servicios</a>
+    <a href="#servicios">Qué hacemos</a>
     <a href="#fundador">Nosotros</a>
     <a href="#contacto">Contacto</a>
   </div>
 </nav>
 
-<!-- ============ HERO ============ -->
+<!-- ============ HERO — VIDEO DE FONDO A PANTALLA COMPLETA (YouTube) ============ -->
 <header class="hero">
-  <div class="hero-media">
-    <!-- 🎬 REEMPLAZÁ: poné acá tu video reel de fondo (muteado, en loop). Descomentá y cambiá el src -->
-    <!-- <video autoplay muted loop playsinline poster="poster.jpg"><source src="reel-hero.mp4" type="video/mp4"></video> -->
-  </div>
   <div class="hero-fallback"></div>
+
+  <!-- 🎬 VIDEO DE FONDO DESDE YOUTUBE — ID ya cargado: n_qRX6oIG3Y ("Spot 2026")
+       ⚠️ Ojo: el video NO se reproduce abriendo el archivo con doble clic (file://).
+       Recién funciona cuando la página está publicada en https (Netlify). Es normal.
+       Para cambiar el video: reemplazá las 2 apariciones del ID (después de /embed/ y en playlist=). -->
+  <div class="yt-bg">
+    <iframe
+      src="https://www.youtube-nocookie.com/embed/n_qRX6oIG3Y?autoplay=1&mute=1&loop=1&playlist=n_qRX6oIG3Y&controls=0&showinfo=0&modestbranding=1&rel=0&playsinline=1&disablekb=1&fs=0&iv_load_policy=3&start=0"
+      title="Reel Burnee" allow="autoplay; encrypted-media" frameborder="0"></iframe>
+  </div>
+
+  <div class="hero-overlay"></div>
   <div class="hero-grain"></div>
 
   <div class="hero-inner">
@@ -213,7 +174,7 @@
     <p class="hero-sub">Video cinematográfico, publicitario y narrativo producido con inteligencia artificial dirigida. Ideas grandes, sin límites de producción. <strong style="color:#fff">The future is now.</strong></p>
     <div class="hero-cta">
       <a href="#contacto" class="btn btn-gold">Quiero mi video ▸</a>
-      <a href="#portfolio" class="btn btn-ghost">Ver trabajos</a>
+      <a href="#servicios" class="btn btn-ghost">Qué hacemos</a>
     </div>
   </div>
 
@@ -228,84 +189,18 @@
   </div>
 </div>
 
-<!-- ============ INTRO SPLIT ============ -->
-<section class="block" id="portfolio">
-  <div class="split reveal">
-    <div class="txt">
-      <div class="kicker"><span class="num">01</span> — Portfolio</div>
-      <h2 class="big">Lo que hacemos<br>habla por sí solo.</h2>
-      <p class="lead">No vendemos "videos con IA". Producimos piezas que capturan atención en el primer segundo y no la sueltan. Cada proyecto combina dirección creativa humana con las herramientas de IA más avanzadas del momento.</p>
-      <ul>
-        <li>Guion, dirección y estética pensados para tu marca</li>
-        <li>Producido con Runway, Kling y Sora</li>
-        <li>Listo para Meta, TikTok y YouTube</li>
-      </ul>
+<!-- ============ TIPOS DE VIDEO — título + frase ============ -->
+<section class="block types" id="servicios">
+  <div class="inner reveal">
+    <div class="kicker" style="justify-content:center"><span class="num">01</span> — Lo que hacemos</div>
+    <h2 class="big">Un formato para<br>cada objetivo.</h2>
+    <p class="phrase">Desde una pieza express que necesitás para ayer, hasta un universo narrativo completo para tu marca. Vos traés la idea; nosotros la volvemos imagen.</p>
+    <div class="names">
+      <span>Activo Digital</span><span class="sep">/</span>
+      <span>Pack de Videos con IA</span><span class="sep">/</span>
+      <span>Videos Publicitarios</span><span class="sep">/</span>
+      <span>Video Express</span>
     </div>
-    <div class="media">
-      <div class="vframe">
-        <span class="badge">🎬 REEL PRINCIPAL</span>
-        <!-- 🎬 REEMPLAZÁ: tu video demo/reel. Descomentá y cambiá el src -->
-        <!-- <video controls poster="poster-reel.jpg"><source src="reel.mp4" type="video/mp4"></video> -->
-        <div class="ph">
-          <div class="play"><svg width="22" height="22" viewBox="0 0 24 24" fill="#0c0710"><path d="M8 5v14l11-7z"/></svg></div>
-          <small>Poné acá tu reel principal</small>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ PORTFOLIO GRID ============ -->
-<section class="block" style="padding-top:0">
-  <div class="reveal" style="max-width:1280px;margin:0 auto">
-    <div class="kicker"><span class="num">·</span> Selección de trabajos</div>
-    <h2 class="big">Casos & piezas</h2>
-    <div class="pf-grid">
-      <div class="pf-item">
-        <div class="vframe"><span class="badge">Publicidad</span>
-          <!-- 🎬 <video controls poster="p1.jpg"><source src="video1.mp4" type="video/mp4"></video> -->
-          <div class="ph"><div class="play"><svg width="20" height="20" viewBox="0 0 24 24" fill="#0c0710"><path d="M8 5v14l11-7z"/></svg></div><small>Video 1</small></div>
-        </div>
-        <h4>Campaña Meta Ads</h4><span>Spot performance · 15s</span>
-      </div>
-      <div class="pf-item">
-        <div class="vframe"><span class="badge">Narrativo</span>
-          <div class="ph"><div class="play"><svg width="20" height="20" viewBox="0 0 24 24" fill="#0c0710"><path d="M8 5v14l11-7z"/></svg></div><small>Video 2</small></div>
-        </div>
-        <h4>Micro-drama de marca</h4><span>Activo Digital · serie</span>
-      </div>
-      <div class="pf-item">
-        <div class="vframe"><span class="badge">Cinemático</span>
-          <div class="ph"><div class="play"><svg width="20" height="20" viewBox="0 0 24 24" fill="#0c0710"><path d="M8 5v14l11-7z"/></svg></div><small>Video 3</small></div>
-        </div>
-        <h4>Universo visual</h4><span>Brand film · IA dirigida</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ SERVICIOS / SPLIT REVERSE ============ -->
-<section class="block" id="servicios" style="background:linear-gradient(180deg,var(--ink),var(--ink-2))">
-  <div class="split rev reveal">
-    <div class="txt">
-      <div class="kicker"><span class="num">02</span> — Servicios</div>
-      <h2 class="big">Un formato<br>para cada objetivo.</h2>
-      <p class="lead">Desde una pieza express hasta un ecosistema narrativo completo. Elegís según lo que tu marca necesita hoy.</p>
-    </div>
-    <div class="media">
-      <div class="vframe portrait">
-        <span class="badge">✨ Demo servicios</span>
-        <!-- 🎬 <video controls poster="serv.jpg"><source src="servicios.mp4" type="video/mp4"></video> -->
-        <div class="ph"><div class="play"><svg width="22" height="22" viewBox="0 0 24 24" fill="#0c0710"><path d="M8 5v14l11-7z"/></svg></div><small>Video vertical de muestra</small></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="prod-grid reveal">
-    <div class="prod"><span class="tag">PREMIUM</span><h3>Activo Digital</h3><p>Ecosistema narrativo: micro-dramas, contenido cinematográfico y universos de marca.</p><div class="arrow">→</div></div>
-    <div class="prod"><span class="tag">RECURRENTE</span><h3>Pack Videos IA</h3><p>Paquete mensual de contenido para mantener tus redes siempre activas.</p><div class="arrow">→</div></div>
-    <div class="prod"><span class="tag">PERFORMANCE</span><h3>Videos Publicitarios</h3><p>Spots orientados a conversión para Meta, TikTok y YouTube.</p><div class="arrow">→</div></div>
-    <div class="prod"><span class="tag">EXPRESS</span><h3>Video Express</h3><p>Entrega rápida, punto de entrada ideal para probar el poder de la IA.</p><div class="arrow">→</div></div>
   </div>
 </section>
 
@@ -313,16 +208,18 @@
 <section class="block founder-wrap" id="fundador">
   <div class="split reveal">
     <div class="media">
-      <div class="vframe portrait">
+      <div class="photo">
         <span class="badge">👋 El fundador</span>
-        <!-- 🎬/🖼️ REEMPLAZÁ por tu video de presentación o foto:
-             Video: <video controls poster="ivan.jpg"><source src="fundador.mp4" type="video/mp4"></video>
-             Foto:  <img src="ivan.jpg" alt="Fundador de Burnee"> -->
-        <div class="ph"><div class="play"><svg width="22" height="22" viewBox="0 0 24 24" fill="#0c0710"><path d="M8 5v14l11-7z"/></svg></div><small>Tu video / foto de presentación</small></div>
+        <!-- 🖼️ REEMPLAZÁ por tu foto: borrá el bloque .ph de abajo y dejá:
+             <img src="foto-fundador.jpg" alt="Fundador de Burnee"> -->
+        <div class="ph">
+          <div class="ic">📷</div>
+          <small>Tu foto de presentación</small>
+        </div>
       </div>
     </div>
     <div class="txt">
-      <div class="kicker"><span class="num">03</span> — Quién está detrás</div>
+      <div class="kicker"><span class="num">02</span> — Quién está detrás</div>
       <h2 class="big">Detrás de Burnee<br>hay una obsesión.</h2>
       <p class="lead">Soy quien dirige cada proyecto. Burnee nació de una idea simple: la IA no reemplaza la creatividad, la potencia. Combino visión narrativa con las mejores herramientas del mundo para que tu marca cuente historias que antes eran imposibles de producir — con la agilidad y el costo de hoy.</p>
       <p class="lead">Trabajamos desde Mendoza para clientes de Argentina y el mundo. Cada video es <strong style="color:#fff">producción asistida</strong>: dirección humana, ejecución con IA.</p>
@@ -333,10 +230,10 @@
   </div>
 </section>
 
-<!-- ============ CONTACTO / CÓMO TRABAJAR ============ -->
+<!-- ============ CONTACTO ============ -->
 <section class="block contact" id="contacto">
   <div class="reveal">
-    <div class="kicker" style="justify-content:center"><span class="num">04</span> — Cómo trabajamos</div>
+    <div class="kicker" style="justify-content:center"><span class="num">03</span> — Cómo trabajamos</div>
     <h2 class="big">Tu próximo video<br>empieza con un mensaje.</h2>
     <p class="lead">Sin vueltas ni formularios eternos. Escribinos, contanos tu idea y en 24 h te devolvemos una propuesta.</p>
 
@@ -365,21 +262,17 @@
   </div>
 </footer>
 
-<!-- floating whatsapp -->
 <a class="fab" href="https://wa.me/5492610000000?text=Hola%20Burnee!" target="_blank" rel="noopener" aria-label="WhatsApp">
   <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1012 2zm5.9 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.2-.3.5-.4.7-.4h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.3.3c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.3.1.5.1.7-.1l.9-1c.2-.2.4-.2.6-.1l2 .9c.3.2.5.3.5.4.1.2.1.7-.1 1.1z"/></svg>
 </a>
 
 <script>
-  // scroll progress
   const bar=document.getElementById('progress');
   addEventListener('scroll',()=>{
     const h=document.documentElement;
-    const s=h.scrollTop/(h.scrollHeight-h.clientHeight);
-    bar.style.width=(s*100)+'%';
+    bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
   },{passive:true});
 
-  // reveal on scroll
   const io=new IntersectionObserver((es)=>{
     es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}});
   },{threshold:.15});
