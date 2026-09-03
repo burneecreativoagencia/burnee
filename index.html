@@ -93,16 +93,19 @@
   .originals .inner{max-width:1000px;margin:0 auto}
   .originals h2 .grad2{background:linear-gradient(100deg,var(--gold),var(--purple-glow));-webkit-background-clip:text;background-clip:text;color:transparent}
   .originals p.phrase{color:var(--muted);font-size:clamp(16px,2.2vw,22px);line-height:1.6;margin:22px auto 0;max-width:640px}
-  .orig-card{position:relative;display:block;margin:46px auto 0;max-width:920px;aspect-ratio:16/9;border-radius:20px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 70px rgba(0,0,0,.6);text-decoration:none}
+  .orig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:46px}
+  @media(max-width:860px){.orig-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.orig-grid{grid-template-columns:1fr}}
+  .orig-card{position:relative;display:block;aspect-ratio:16/9;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 20px 50px rgba(0,0,0,.5);text-decoration:none}
   .orig-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.16,1,.3,1)}
   .orig-card:hover img{transform:scale(1.06)}
-  .orig-card .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,7,16,.15) 0%,rgba(12,7,16,0) 30%,rgba(12,7,16,.35) 60%,rgba(12,7,16,.85) 100%)}
-  .orig-card .play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:82px;height:82px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;animation:pulse 2.6s infinite;transition:transform .3s}
+  .orig-card .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,7,16,.15) 0%,rgba(12,7,16,0) 28%,rgba(12,7,16,.4) 58%,rgba(12,7,16,.9) 100%)}
+  .orig-card .play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:58px;height:58px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;animation:pulse 2.6s infinite;transition:transform .3s}
   .orig-card:hover .play{transform:translate(-50%,-50%) scale(1.1)}
-  .orig-card .meta{position:absolute;left:clamp(18px,3vw,28px);right:clamp(18px,3vw,28px);bottom:clamp(16px,3vw,24px);text-align:left}
-  .orig-card .meta .tag{display:inline-block;font-family:var(--font-display);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink);background:var(--gold);padding:5px 11px;border-radius:20px;margin-bottom:12px}
-  .orig-card .meta h3{font-family:var(--font-display);font-weight:600;color:#fff;font-size:clamp(18px,2.6vw,26px);line-height:1.15;text-shadow:0 2px 20px rgba(0,0,0,.6)}
-  .orig-card .meta .chan{color:#e7dcf1;font-size:13px;margin-top:6px;display:flex;align-items:center;gap:7px}
+  .orig-card .meta{position:absolute;left:16px;right:16px;bottom:15px;text-align:left}
+  .orig-card .meta .tag{display:inline-block;font-family:var(--font-display);font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink);background:var(--gold);padding:4px 9px;border-radius:20px;margin-bottom:10px}
+  .orig-card .meta h3{font-family:var(--font-display);font-weight:600;color:#fff;font-size:clamp(15px,1.5vw,17px);line-height:1.2;text-shadow:0 2px 20px rgba(0,0,0,.7)}
+  .orig-card .meta .chan{color:#e7dcf1;font-size:12px;margin-top:6px}
   .originals .cta{margin-top:30px}
   /* FOUNDER */
   .founder-wrap{background:linear-gradient(180deg,var(--ink),var(--ink-2));border-top:1px solid var(--line)}
@@ -208,22 +211,49 @@
     <h2 class="big"><span class="grad2">Originals</span></h2>
     <p class="phrase">No solo producimos para marcas: creamos nuestras propias historias con IA. Mirá lo que estamos produciendo.</p>
 
-    <!-- 🎬 ORIGINAL — para cambiar el video: reemplazá el ID (tJN7hKNLWHI) en el href y en la miniatura (src) -->
-    <a class="orig-card" href="https://www.youtube.com/watch?v=tJN7hKNLWHI" target="_blank" rel="noopener">
-      <img src="https://i.ytimg.com/vi/tJN7hKNLWHI/maxresdefault.jpg"
-           onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/tJN7hKNLWHI/hqdefault.jpg'"
-           alt="¿Qué hacía San Martín el 9 de Julio de 1816?">
-      <div class="veil"></div>
-      <div class="play"><svg width="30" height="30" viewBox="0 0 24 24" fill="#0c0710"><path d="M8 5v14l11-7z"/></svg></div>
-      <div class="meta">
-        <span class="tag">▸ Nuevo original</span>
-        <h3>¿Qué hacía San Martín el 9 de Julio de 1816?</h3>
-        <div class="chan">La hora de los pueblos · Miralo en YouTube ↗</div>
-      </div>
-    </a>
+    <!-- 🎬 ORIGINALS — para cambiar/agregar un video: copiá un bloque <a class="orig-card"> y reemplazá
+         el ID de YouTube (aparece 3 veces por tarjeta: href, src de la miniatura y el fallback), el título y el canal. -->
+    <div class="orig-grid">
 
-    <div class="cta">
-      <a href="https://www.youtube.com/watch?v=tJN7hKNLWHI" class="btn btn-ghost" target="_blank" rel="noopener">Ver el original en YouTube ↗</a>
+      <a class="orig-card" href="https://www.youtube.com/watch?v=tJN7hKNLWHI" target="_blank" rel="noopener">
+        <img src="https://i.ytimg.com/vi/tJN7hKNLWHI/maxresdefault.jpg"
+             onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/tJN7hKNLWHI/hqdefault.jpg'"
+             alt="¿Qué hacía San Martín el 9 de Julio de 1816?">
+        <div class="veil"></div>
+        <div class="play"><svg width="24" height="24" viewBox="0 0 24 24" fill="#0c0710"><path d="M8 5v14l11-7z"/></svg></div>
+        <div class="meta">
+          <span class="tag">▸ Original</span>
+          <h3>¿Qué hacía San Martín el 9 de Julio de 1816?</h3>
+          <div class="chan">La hora de los pueblos ↗</div>
+        </div>
+      </a>
+
+      <a class="orig-card" href="https://www.youtube.com/watch?v=mgwOmVByQfs" target="_blank" rel="noopener">
+        <img src="https://i.ytimg.com/vi/mgwOmVByQfs/maxresdefault.jpg"
+             onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/mgwOmVByQfs/hqdefault.jpg'"
+             alt="Cruce de los Andes: Batalla de Guardia Vieja. Capítulo 2">
+        <div class="veil"></div>
+        <div class="play"><svg width="24" height="24" viewBox="0 0 24 24" fill="#0c0710"><path d="M8 5v14l11-7z"/></svg></div>
+        <div class="meta">
+          <span class="tag">▸ Original</span>
+          <h3>Cruce de los Andes: Batalla de Guardia Vieja · Cap. 2</h3>
+          <div class="chan">La hora de los pueblos ↗</div>
+        </div>
+      </a>
+
+      <a class="orig-card" href="https://www.youtube.com/watch?v=CrlUChKhT0g" target="_blank" rel="noopener">
+        <img src="https://i.ytimg.com/vi/CrlUChKhT0g/maxresdefault.jpg"
+             onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/CrlUChKhT0g/hqdefault.jpg'"
+             alt="TWO PENSIONERS — AI Short Film">
+        <div class="veil"></div>
+        <div class="play"><svg width="24" height="24" viewBox="0 0 24 24" fill="#0c0710"><path d="M8 5v14l11-7z"/></svg></div>
+        <div class="meta">
+          <span class="tag">▸ Short Film</span>
+          <h3>TWO PENSIONERS · AI Short Film</h3>
+          <div class="chan">Higgsfield Global Film Festival 2026 ↗</div>
+        </div>
+      </a>
+
     </div>
   </div>
 </section>
@@ -260,7 +290,7 @@
     </div>
     <div class="contact-cta">
       <!-- 📱 REEMPLAZÁ el número (formato internacional sin + ni espacios) -->
-      <a href="https://wa.me/5492613027647?text=Hola%20Burnee!Webpage%20Quiero%20info%20sobre%20un%20video%20con%20IA" class="btn whats" target="_blank" rel="noopener">
+      <a href="https://wa.me/5492615451672?text=Hola%20Burnee!%20Quiero%20info%20sobre%20un%20video%20con%20IA" class="btn whats" target="_blank" rel="noopener">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="#062e18"><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1012 2zm5.9 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.2-.3.5-.4.7-.4h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.3.3c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.3.1.5.1.7-.1l.9-1c.2-.2.4-.2.6-.1l2 .9c.3.2.5.3.5.4.1.2.1.7-.1 1.1z"/></svg>
         Escribinos por WhatsApp
       </a>
@@ -272,10 +302,10 @@
   <div class="fnote">Video con IA · Mendoza, Argentina · The future is now</div>
   <div class="socials">
     <a href="https://instagram.com/burneecreativo" target="_blank" rel="noopener">Instagram ↗</a>
-    <a href="https://wa.me/5492613027647" target="_blank" rel="noopener">WhatsApp ↗</a>
+    <a href="https://wa.me/5492615451672" target="_blank" rel="noopener">WhatsApp ↗</a>
   </div>
 </footer>
-<a class="fab" href="https://wa.me/5492613027647?text=Hola%20Burnee!Webpage%20Quiero%20info%20sobre%20un%20video%20con%20IA" target="_blank" rel="noopener" aria-label="WhatsApp">
+<a class="fab" href="https://wa.me/5492615451672?text=Hola%20Burnee!" target="_blank" rel="noopener" aria-label="WhatsApp">
   <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1012 2zm5.9 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.2-.3.5-.4.7-.4h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.3.3c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.3.1.5.1.7-.1l.9-1c.2-.2.4-.2.6-.1l2 .9c.3.2.5.3.5.4.1.2.1.7-.1 1.1z"/></svg>
 </a>
 <script>
