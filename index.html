@@ -107,6 +107,25 @@
   .orig-card .meta h3{font-family:var(--font-display);font-weight:600;color:#fff;font-size:clamp(15px,1.5vw,17px);line-height:1.2;text-shadow:0 2px 20px rgba(0,0,0,.7)}
   .orig-card .meta .chan{color:#e7dcf1;font-size:12px;margin-top:6px}
   .originals .cta{margin-top:30px}
+  /* PRENSA */
+  .press{border-top:1px solid var(--line);background:linear-gradient(180deg,var(--ink),var(--ink-2))}
+  .press .inner{max-width:1100px;margin:0 auto}
+  .press p.phrase{color:var(--muted);font-size:clamp(16px,2.2vw,20px);line-height:1.6;margin-top:22px;max-width:620px}
+  .press-list{margin-top:50px;display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  @media(max-width:600px){.press-list{grid-template-columns:1fr}}
+  .p-item{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:rgba(255,255,255,.02);text-decoration:none;color:inherit;transition:border-color .3s,transform .3s}
+  a.p-item:hover{border-color:rgba(245,166,35,.55);transform:translateY(-4px)}
+  .p-thumb{position:relative;aspect-ratio:16/9;background:radial-gradient(circle at 30% 30%,rgba(162,79,208,.35),transparent 60%),var(--card);overflow:hidden}
+  .p-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.16,1,.3,1)}
+  a.p-item:hover .p-thumb img{transform:scale(1.05)}
+  .p-thumb .play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:50px;height:50px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center}
+  .p-thumb .mark{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 16px;font-family:var(--font-display);font-weight:700;font-size:clamp(24px,2.8vw,34px);letter-spacing:-.02em;color:rgba(255,255,255,.85)}
+  .p-body{padding:20px 20px 22px;display:flex;flex-direction:column;gap:10px;flex:1}
+  .p-meta{display:flex;gap:10px;align-items:center;font-family:var(--font-display);font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:var(--gold)}
+  .p-meta .d{color:var(--muted)}
+  .p-body h3{font-family:var(--font-display);font-weight:600;font-size:18px;line-height:1.25;color:#fff}
+  .p-body p{color:var(--muted);font-size:14px;line-height:1.6}
+  .p-body .go{margin-top:auto;padding-top:6px;font-family:var(--font-display);font-size:13px;color:#e7dcf1}
   /* FOUNDER */
   .founder-wrap{background:linear-gradient(180deg,var(--ink),var(--ink-2));border-top:1px solid var(--line)}
   .split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,72px);align-items:center;max-width:1280px;margin:0 auto}
@@ -150,6 +169,7 @@
   <div class="nav-links">
     <a href="#servicios">Qué hacemos</a>
     <a href="#originals">Originals</a>
+    <a href="#prensa">Prensa</a>
     <a href="#fundador">Nosotros</a>
     <a href="#contacto">Contacto</a>
   </div>
@@ -257,6 +277,18 @@
     </div>
   </div>
 </section>
+<!-- ============ PRENSA ============ -->
+<section class="block press" id="prensa">
+  <div class="inner reveal">
+    <div class="kicker"><span class="num">03</span> — En los medios</div>
+    <h2 class="big">Prensa y charlas.</h2>
+    <p class="phrase">Lucciano Art en televisión, escenarios y concursos internacionales, hablando de cómo se hace cine con IA desde Mendoza.</p>
+    <!-- 📰 PRENSA — se arma sola desde la lista PRENSA del script al final de la página.
+         Para sumar una nota, agregá un objeto { medio, fecha, titulo, texto, youtube, link }.
+         youtube = solo el ID del video (lo que va después de watch?v=). Si lo dejás vacío, la tarjeta sale sin miniatura. -->
+    <div class="press-list" id="press-list"></div>
+  </div>
+</section>
 <!-- ============ FUNDADOR ============ -->
 <section class="block founder-wrap" id="fundador">
   <div class="split reveal">
@@ -267,7 +299,7 @@
       </div>
     </div>
     <div class="txt">
-      <div class="kicker"><span class="num">03</span> — Quién está detrás</div>
+      <div class="kicker"><span class="num">04</span> — Quién está detrás</div>
       <h2 class="big">Detrás de Burnee<br>hay una obsesión.</h2>
       <p class="lead">Soy Lucciano Art, quien dirige cada proyecto. Burnee nació de una idea simple: la IA no reemplaza la creatividad, la potencia. Combino visión narrativa con las mejores herramientas del mundo para que tu marca cuente historias que antes eran imposibles de producir — con la agilidad y el costo de hoy.</p>
       <p class="lead">Trabajamos desde Mendoza para clientes de Argentina y el mundo. Cada video es <strong style="color:#fff">producción asistida</strong>: dirección humana, ejecución con IA.</p>
@@ -280,7 +312,7 @@
 <!-- ============ CONTACTO ============ -->
 <section class="block contact" id="contacto">
   <div class="reveal">
-    <div class="kicker" style="justify-content:center"><span class="num">04</span> — Cómo trabajamos</div>
+    <div class="kicker" style="justify-content:center"><span class="num">05</span> — Cómo trabajamos</div>
     <h2 class="big">Tu próximo video<br>empieza con un mensaje.</h2>
     <p class="lead">Sin vueltas ni formularios eternos. Escribinos, contanos tu idea y en 24 h te devolvemos una propuesta.</p>
     <div class="steps">
@@ -308,6 +340,29 @@
 <a class="fab" href="https://wa.me/54926153027647?text=Hola%20Burnee!" target="_blank" rel="noopener" aria-label="WhatsApp">
   <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1012 2zm5.9 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.2-.3.5-.4.7-.4h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.3.3c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.3.1.5.1.7-.1l.9-1c.2-.2.4-.2.6-.1l2 .9c.3.2.5.3.5.4.1.2.1.7-.1 1.1z"/></svg>
 </a>
+<script>
+  // 📰 Notas de prensa (la más nueva primero)
+  const PRENSA=[
+    {medio:'Canal 7 Mendoza',fecha:'Nov 2026',titulo:'Cine hecho con inteligencia artificial desde Mendoza',
+     texto:'Lucciano Art en el 7: cómo dirige películas con IA y por qué el talento sigue siendo humano.',youtube:'',link:''},
+    {medio:'FLAT',fecha:'20 Nov 2026',titulo:'Charla “Cine con IA”',
+     texto:'Quince minutos sobre continuidad, directores que rechazan la IA y cómo competir de igual a igual con el mercado internacional.',youtube:'xXYsi1mfYdQ',link:''},
+    {medio:'YouTube · Lucciano Art',fecha:'Nov 2026',titulo:'Cine con IA: el proceso real de producción',
+     texto:'Del desglose de guión al montaje final: cómo se hace una película con inteligencia artificial, etapa por etapa.',youtube:'3VAjfeNKsY8',link:''},
+    {medio:'AI Creative Challenge',fecha:'Oct 2026',titulo:'Ganador de la fecha Buenos Aires',
+     texto:'Lucciano Baca ganó la edición porteña del concurso de The One Club y Google. Próxima parada: la final en Nueva York.',youtube:'',link:'https://creativechallenge.ai'}
+  ];
+  const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  document.getElementById('press-list').innerHTML=PRENSA.map(n=>{
+    const url=n.youtube?'https://www.youtube.com/watch?v='+n.youtube:n.link;
+    const thumb=n.youtube
+      ?'<img loading="lazy" src="https://i.ytimg.com/vi/'+n.youtube+'/maxresdefault.jpg" onerror="this.onerror=null;this.src=\'https://i.ytimg.com/vi/'+n.youtube+'/hqdefault.jpg\'" alt="'+esc(n.titulo)+'"><div class="play"><svg width="20" height="20" viewBox="0 0 24 24" fill="#0c0710"><path d="M8 5v14l11-7z"/></svg></div>'
+      :'<div class="mark">'+esc(n.medio)+'</div>';
+    const go=n.youtube?'Ver en YouTube ↗':(n.link?'Ver nota ↗':'Video próximamente');
+    const inner='<div class="p-thumb">'+thumb+'</div><div class="p-body"><div class="p-meta"><span>'+esc(n.medio)+'</span><span class="d">'+esc(n.fecha)+'</span></div><h3>'+esc(n.titulo)+'</h3><p>'+esc(n.texto)+'</p><div class="go">'+go+'</div></div>';
+    return url?'<a class="p-item" href="'+url+'" target="_blank" rel="noopener">'+inner+'</a>':'<div class="p-item">'+inner+'</div>';
+  }).join('');
+</script>
 <script>
   const bar=document.getElementById('progress');
   addEventListener('scroll',()=>{
